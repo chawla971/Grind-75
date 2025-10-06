@@ -1,0 +1,37 @@
+"""
+Problem: Group Anagrams (LeetCode #49)
+--------------------------------------
+Given an array of strings strs, group the anagrams together.
+You can return the answer in any order.
+
+Example:
+Input:  ["eat", "tea", "tan", "ate", "nat", "bat"]
+Output: [["eat","tea","ate"],["tan","nat"],["bat"]]
+"""
+
+from collections import defaultdict
+from typing import List
+
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # Use defaultdict so we don't have to check if key exists
+        anagram_map = defaultdict(list)
+
+        for s in strs:
+            # Sort each string and use it as a tuple key
+            sorted_s = tuple(sorted(s))
+            anagram_map[sorted_s].append(s)
+
+        # Convert map values to list of groups
+        result = list(anagram_map.values())
+        return result
+
+
+# 🧪 Quick local test
+if __name__ == "__main__":
+    solver = Solution()
+    test_input = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    output = solver.groupAnagrams(test_input)
+    print(output)
+
