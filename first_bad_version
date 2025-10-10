@@ -1,0 +1,32 @@
+# Mock API (LeetCode provides this in the real problem)
+def isBadVersion(version: int) -> bool:
+    return version >= BAD_VERSION
+
+# Actual solution
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        l, r = 1, n
+        while l < r:
+            mid = l + (r - l) // 2
+            if isBadVersion(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return l
+
+# ----------------------------
+# Testing locally in VS Code
+# ----------------------------
+if __name__ == "__main__":
+    BAD_VERSION = 4   # simulate the first bad version
+    n = 5
+    sol = Solution()
+    print(f"First bad version: {sol.firstBadVersion(n)}")  # Expected: 4
+
+    BAD_VERSION = 1
+    n = 1
+    print(f"First bad version: {sol.firstBadVersion(n)}")  # Expected: 1
+
+    BAD_VERSION = 7
+    n = 10
+    print(f"First bad version: {sol.firstBadVersion(n)}")  # Expected: 7

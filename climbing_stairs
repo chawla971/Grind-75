@@ -1,0 +1,24 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # Base cases: if there's only 1 or 2 steps
+        if n <= 2:
+            return n
+        
+        one, two = 1, 1  # represents f(i), f(i-1)
+        for i in range(n - 1):
+            temp = one
+            one = one + two
+            two = temp
+        return one
+
+
+# ----------------------------
+# Testing locally in VS Code
+# ----------------------------
+if __name__ == "__main__":
+    sol = Solution()
+    
+    # You can modify these test cases freely:
+    test_cases = [1, 2, 3, 4, 5, 10]
+    for n in test_cases:
+        print(f"n = {n} -> ways = {sol.climbStairs(n)}")
