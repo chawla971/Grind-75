@@ -1,0 +1,42 @@
+"""
+Problem: Binary Search (LeetCode #704)
+--------------------------------------
+Given a sorted array of integers 'nums' and an integer 'target',
+return the index of 'target' if it exists, otherwise return -1.
+"""
+
+from typing import List
+
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l, r = 0, len(nums) - 1
+
+        while l <= r:
+            m = l + (r - l) // 2  # midpoint to avoid overflow (good practice)
+            if nums[m] > target:
+                r = m - 1
+            elif nums[m] < target:
+                l = m + 1
+            else:
+                return m  # found target
+        return -1  # not found
+
+
+# 🧪 Local testing
+def main():
+    solver = Solution()
+    test_cases = [
+        ([ -1, 0, 3, 5, 9, 12 ], 9, 4),
+        ([ -1, 0, 3, 5, 9, 12 ], 2, -1),
+        ([1], 1, 0),
+        ([1], 2, -1),
+        ([1, 2, 3, 4, 5], 4, 3)
+    ]
+
+    for nums, target, expected in test_cases:
+        result = solver.search(nums, target)
+        print(f"nums: {nums}, target: {target} → Output: {result}, Expected: {expected}")
+
+if __name__ == "__main__":
+    main()
