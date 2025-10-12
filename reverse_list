@@ -1,0 +1,45 @@
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev, curr = None, head
+        while curr:
+            nxt = curr.next        # save next node
+            curr.next = prev       # reverse the link 🔁
+            prev = curr            # move prev forward
+            curr = nxt             # move curr forward
+        return prev
+
+
+# ----------------------------
+# Test in VS Code
+# ----------------------------
+def printList(head):
+    vals = []
+    while head:
+        vals.append(str(head.val))
+        head = head.next
+    print(" -> ".join(vals))
+
+
+if __name__ == "__main__":
+    # Build linked list: 1 -> 2 -> 3 -> 4 -> 5
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
+
+    print("Original list:")
+    printList(head)
+
+    sol = Solution()
+    reversed_head = sol.reverseList(head)
+
+    print("\nReversed list:")
+    printList(reversed_head)
